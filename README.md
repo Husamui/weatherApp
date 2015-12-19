@@ -1,2 +1,2 @@
 #Weather App
-Create weather app from sacratch!
+Create weather app from scratch!
