@@ -13,10 +13,10 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
-
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAC3I_qQhO1lBOnAG3puPVho1X5XzBc4DQ"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/filters/revers.js"></script>
+
 
 </head>
 <body ng-app="app">
@@ -24,6 +24,7 @@
 
     <div ng-controller="weather">
 
+        <div id="map" style="height: 1000px; width: 1000px;"></div>
 
         <input type="text" ng-model="address">
         <a href="#" class="btn btn-primary" ng-click="getweather()">Get Weather</a>
@@ -47,7 +48,11 @@
 
 
 
+    <script type="text/javascript">
 
+
+
+    </script>
 
 </body>
 </html>
