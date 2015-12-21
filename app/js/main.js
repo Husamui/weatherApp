@@ -73,7 +73,7 @@ app.controller('weather', ['$scope','$http',function($scope,$http){
     function initMap(lat, lng) {
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: lat, lng: lng},
-            zoom: 14
+            zoom: 12
         });
     }
 
