@@ -3,7 +3,7 @@ var app = angular.module('app',[]);
 
 app.controller('weather', ['$scope','$http',function($scope,$http){
 
-
+    var mapsApiKey = 'AIzaSyC6PIpDgxcwJoPywvsDgDAUbWD1iQAqrWM';
     var weatherApiKey = 'c04a9512cf2f19dfcf7709bb07fcc4c5';
     var defaultCity = 'San-francisco';
     var zipReg = /\d{5}/g;
@@ -17,6 +17,8 @@ app.controller('weather', ['$scope','$http',function($scope,$http){
     function success(pos) {
         var crd = pos.coords;
         requestWeather('lat='+ crd.latitude + '5&lon=' + crd.longitude);
+
+        initMap(crd.latitude, crd.longitude);
     }
 
     function error(err) {
@@ -30,6 +32,7 @@ app.controller('weather', ['$scope','$http',function($scope,$http){
             navigator.geolocation.getCurrentPosition(success, error, options);
         }else{
             requestWeather('q='+defaultCity);
+            
         }
 
     }
@@ -65,6 +68,15 @@ app.controller('weather', ['$scope','$http',function($scope,$http){
                 // log error
             });
     }
+
+    var map;
+    function initMap(lat, lng) {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: lat, lng: lng},
+            zoom: 12
+        });
+    }
+
 
 
 
