@@ -25,6 +25,7 @@ app.controller('weather', ['$scope','$http',function($scope,$http){
         requestWeather('q='+defaultCity);
     }
 
+    // Check if the browser support GEO location
     function initLocation(){
         if(navigator.geolocation){
             navigator.geolocation.getCurrentPosition(success, error, options);
@@ -35,35 +36,33 @@ app.controller('weather', ['$scope','$http',function($scope,$http){
     }
     initLocation();
 
-    // Update restuls base on search input
+    // Update restuls base on search input.
     $scope.getweather = function() {
         if ($scope.showSearch == true){
             requestWeather(validateLocation($scope.address));
             $scope.showSearch = false;
             $scope.address = "";
+            document.getElementById('address-input').blur();
         }else{
             $scope.showSearch = true;
             document.getElementById("address-input").focus();
         }
     };
 
+    // Validate & Set the parameters for API request.
     function validateLocation(location){
         if (location != undefined && location.length > 1){
-            console.log(location);
             if (location.match(zipReg) && location.length == 5){
-                console.log("it's zip code");
                 return 'zip='+location+',us';
-
             }else{
                 return 'q='+location;
             }
         }else{
-            console.log('def' + typeof location);
             return 'q='+defaultCity;
-            //return false
         }
     }
 
+    // Do the actual API request.
     function requestWeather(location){
         $http.get('http://api.openweathermap.org/data/2.5/weather?' + location + '&units=metric&appid=' + weatherApiKey)
             .success(function(data, status, headers, config) {
@@ -71,7 +70,7 @@ app.controller('weather', ['$scope','$http',function($scope,$http){
                 initMap(data.coord.lat, data.coord.lon );
             })
             .error(function(data, status, headers, config) {
-                // log error
+                alert('Erorr with the api request'+status);
             });
     }
 
@@ -85,7 +84,7 @@ app.controller('weather', ['$scope','$http',function($scope,$http){
 
 }]);
 
-
+// Because sometimes the weather temperature response is decimal values.
 app.filter('rounded', function(){
     return function(text){
         return Math.round( parseInt(text) );

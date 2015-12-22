@@ -90,10 +90,11 @@ body {
   width: 350px;
   height: 240px;
   margin: 0 auto;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0 transparent;
   font-family: 'Open Sans', sans-serif;
   overflow: hidden;
-  background: #fff; }
+  background: #fff;
+  transition: all 0.3s; }
   .weather-widget .weather-icon-holder {
     width: 140px;
     height: 160px;
@@ -193,14 +194,14 @@ body {
           right: 50px;
           color: #8d969e; }
 
-.ready .weather-icon-holder {
-  left: 0; }
-
-.ready .weather-details {
-  right: 0; }
-
-.ready .loc-holder {
-  bottom: 0; }
+.ready {
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); }
+  .ready .weather-icon-holder {
+    left: 0; }
+  .ready .weather-details {
+    right: 0; }
+  .ready .loc-holder {
+    bottom: 0; }
 
 .loading {
   width: 100%;
